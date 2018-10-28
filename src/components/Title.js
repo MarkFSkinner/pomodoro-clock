@@ -1,8 +1,10 @@
 import React from 'react';
 
 const Title = () => (
-  <div id='clock_title'>
-    <h1>Pomodoro Clock</h1>
+  <div className="row">
+    <div className="col-12">
+      <h1 id="header">Pomodoro Clock</h1>
+    </div>
   </div>
 );
 

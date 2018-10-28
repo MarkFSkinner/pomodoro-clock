@@ -1,32 +1,51 @@
-.App {
-  text-align: center;
-}
+body {
+  background-color: #555;
+  color: black; }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
+.container {
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+#header {
+  margin-top: 1.875rem;
+  margin-bottom: 1.875rem;
+  font-size: 3rem; }
 
-.App-link {
-  color: #61dafb;
-}
+#controls {
+  margin-bottom: 1.875rem; }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.circle {
+  border: 0.15rem solid green;
+  border-radius: 50%;
+  background-color: #0de30d;
+  width: 18.75rem;
+  height: 18.75rem;
+  margin-bottom: 1.875rem;
+  margin-left: auto;
+  margin-right: auto; }
+
+.countdown-data {
+  font-size: 3.25rem;
+  margin-top: 3.125rem; }
+
+.clickable {
+  cursor: pointer; }
+
+h5 {
+  font-size: 0.85rem; }
+
+.animated {
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: 3; }
+
+@keyframes pulse {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.1); }
+  100% {
+    transform: scale(1); } }
+.pulse {
+  animation-name: pulse;
+  animation-duration: 1s; }

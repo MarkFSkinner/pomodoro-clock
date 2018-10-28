@@ -2,12 +2,14 @@ import {
   BREAK_INCREASE,
   BREAK_DECREASE,
   SESSION_INCREASE,
-  SESSION_DECREASE
+  SESSION_DECREASE,
+  SET_CURRENT_TIME
 } from '../actions/types';
 
 const initialState = {
   breakTime: 5,
   sessionTime: 25,
+  currentTime: 25,
   totalTime: undefined,
   interval: undefined,
   remaining: undefined,
@@ -42,6 +44,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         sessionTime: state.sessionTime - 1
+      }
+    case SET_CURRENT_TIME:
+      return {
+        ...state,
+        currentTime: state.sessionTime
       }
     default:
       return state;

@@ -10,7 +10,8 @@ import {
   increaseBreakTime,
   decreaseBreakTime,
   increaseSessionTime,
-  decreaseSessionTime
+  decreaseSessionTime,
+  setCurrentTime
 } from './actions';
 
 
@@ -22,16 +23,18 @@ class App extends Component {
       this.props.increaseBreakTime();
     }
     if(e.target.classList.contains('break-decrease')) {
-      if (this.props.myData.breakTime > 0) {
+      if (this.props.myData.breakTime > 1) {
         this.props.decreaseBreakTime();
       }
     }
     if(e.target.classList.contains('session-increase')) {
       this.props.increaseSessionTime();
+      this.props.setCurrentTime();
     }
     if(e.target.classList.contains('session-decrease')) {
-      if (this.props.myData.sessionTime > 0) {
+      if (this.props.myData.sessionTime > 1) {
         this.props.decreaseSessionTime();
+        this.props.setCurrentTime();
       }
     }
   }
@@ -45,7 +48,7 @@ class App extends Component {
           sessionTime={this.props.myData.sessionTime}
           handleClick={this.handleClick}
         />
-        <Clock />
+        <Clock currentTime={this.props.myData.currentTime} />
       </div>
     );
   }
@@ -61,6 +64,7 @@ export default connect(mapStateToProps, {
   increaseBreakTime,
   decreaseBreakTime,
   increaseSessionTime,
-  decreaseSessionTime
+  decreaseSessionTime,
+  setCurrentTime
 })(App);
 

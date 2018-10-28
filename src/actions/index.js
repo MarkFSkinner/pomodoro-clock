@@ -2,7 +2,8 @@ import {
   BREAK_INCREASE,
   BREAK_DECREASE,
   SESSION_INCREASE,
-  SESSION_DECREASE
+  SESSION_DECREASE,
+  SET_CURRENT_TIME
 } from './types';
 
 export const increaseBreakTime = () => {
@@ -26,5 +27,11 @@ export const increaseSessionTime = () => {
 export const decreaseSessionTime = () => {
   return {
     type: SESSION_DECREASE
+  }
+}
+
+export const setCurrentTime = () => {
+  return {
+    type: SET_CURRENT_TIME
   }
 }

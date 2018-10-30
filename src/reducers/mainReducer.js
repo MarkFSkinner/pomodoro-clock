@@ -10,9 +10,9 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  breakTime: 5,
-  sessionTime: 25,
-  currentTime: 25,
+  breakTime: 0.25,
+  sessionTime: 0.125,
+  currentTime: 0.125,
   totalTime: undefined,
   interval: undefined,
   remaining: undefined,

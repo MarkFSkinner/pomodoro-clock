@@ -6,13 +6,14 @@ import {
   SET_CURRENT_TIME,
   UPDATE_TIME,
   UPDATE_STATUS,
-  SET_ONBREAK
+  SET_ONBREAK,
+  UPDATE_ANIMATION
 } from '../actions/types';
 
 const initialState = {
   breakTime: 0.25,
-  sessionTime: 0.125,
-  currentTime: 0.125,
+  sessionTime: 0.25,
+  currentTime: 0.25,
   totalTime: undefined,
   interval: undefined,
   remaining: undefined,
@@ -24,7 +25,8 @@ const initialState = {
   hours: undefined,
   minutes: undefined,
   seconds: undefined,
-  status: 'SESSION'
+  status: 'SESSION',
+  animated: 'countdown-data'
 };
 
 export default function(state = initialState, action) {
@@ -68,6 +70,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         onBreak: !state.onBreak
+      }
+    case UPDATE_ANIMATION:
+      return {
+        ...state,
+        animated: action.payload
       }
     default:
       return state;

@@ -6,7 +6,8 @@ import {
   SET_CURRENT_TIME,
   UPDATE_TIME,
   UPDATE_STATUS,
-  SET_ONBREAK
+  SET_ONBREAK,
+  UPDATE_ANIMATION
 } from './types';
 
 export const increaseBreakTime = () => {
@@ -58,3 +59,11 @@ export const setOnBreak = () => {
     type: SET_ONBREAK,
   }
 }
+
+export const updateAnimation = (data) => {
+  return {
+    type: UPDATE_ANIMATION,
+    payload: data
+  }
+}
+

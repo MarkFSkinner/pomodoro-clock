@@ -6,7 +6,7 @@ const Clock = props => (
       <div className="circle clickable" onClick={props.handleClick}>
         <div className="row">
           <div className="col-12">
-            <h1 id="status" className="countdown-data">{props.status}</h1>
+            <h1 id="status" className={props.animated}>{props.status}</h1>
           </div>
         </div>
         <div className="row">

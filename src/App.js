@@ -14,7 +14,8 @@ import {
   setCurrentTime,
   updateTime,
   updateStatus,
-  setOnBreak
+  setOnBreak,
+  updateAnimation
 } from './actions';
 
 
@@ -41,6 +42,7 @@ class App extends Component {
       if (remaining === 0) {
         this.props.myData.audio.play();
         //$('#status').removeClass('animated pulse');
+        this.props.updateAnimation('countdown-data');
       }
       if (remaining < 0) {
         clearInterval(interval);
@@ -51,6 +53,7 @@ class App extends Component {
           document.getElementsByClassName('circle')[0].style.backgroundColor = "#f03232";
           document.getElementsByClassName('circle')[0].style.border = "0.15rem solid #8d0303";
           //$('#status').addClass('animated pulse');
+          this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         } else {
           const totalTime = this.props.myData.sessionTime;
@@ -59,6 +62,7 @@ class App extends Component {
           document.getElementsByClassName('circle')[0].style.backgroundColor = "#0de30d";
           document.getElementsByClassName('circle')[0].style.border = "0.15rem solid green";
           //$('#status').addClass('animated pulse');
+          this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         }
       }
@@ -87,6 +91,7 @@ class App extends Component {
       }
     }
     if(e.target.classList.contains('circle')) {
+      this.props.updateAnimation('countdown-data animated pulse');
       this.startTimer(this.props.myData.currentTime);
     }
   }
@@ -103,6 +108,7 @@ class App extends Component {
         <Clock currentTime={this.props.myData.currentTime}
           status={this.props.myData.status}
           handleClick={this.handleClick}
+          animated={this.props.myData.animated}
         />
       </div>
     );
@@ -123,6 +129,7 @@ export default connect(mapStateToProps, {
   setCurrentTime,
   updateTime,
   updateStatus,
-  setOnBreak
+  setOnBreak,
+  updateAnimation
 })(App);
 

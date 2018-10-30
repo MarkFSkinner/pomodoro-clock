@@ -6,3 +6,4 @@ export const SET_CURRENT_TIME = 'SET_CURRENT_TIME';
 export const UPDATE_TIME = 'UPDATE_TIME';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 export const SET_ONBREAK = 'SET_ONBREAK';
+export const UPDATE_ANIMATION = 'UPDATE_ANIMATION';

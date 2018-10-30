@@ -3,7 +3,10 @@ import {
   BREAK_DECREASE,
   SESSION_INCREASE,
   SESSION_DECREASE,
-  SET_CURRENT_TIME
+  SET_CURRENT_TIME,
+  UPDATE_TIME,
+  UPDATE_STATUS,
+  SET_ONBREAK
 } from '../actions/types';
 
 const initialState = {
@@ -20,7 +23,8 @@ const initialState = {
   start: Date.now(),
   hours: undefined,
   minutes: undefined,
-  seconds: undefined
+  seconds: undefined,
+  status: 'SESSION'
 };
 
 export default function(state = initialState, action) {
@@ -49,6 +53,21 @@ export default function(state = initialState, action) {
       return {
         ...state,
         currentTime: state.sessionTime
+      }
+    case UPDATE_TIME:
+      return {
+        ...state,
+        currentTime: action.payload
+      }
+    case UPDATE_STATUS:
+      return {
+        ...state,
+        status: action.payload
+      }
+    case SET_ONBREAK:
+      return {
+        ...state,
+        onBreak: !state.onBreak
       }
     default:
       return state;

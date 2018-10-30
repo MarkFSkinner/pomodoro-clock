@@ -3,7 +3,10 @@ import {
   BREAK_DECREASE,
   SESSION_INCREASE,
   SESSION_DECREASE,
-  SET_CURRENT_TIME
+  SET_CURRENT_TIME,
+  UPDATE_TIME,
+  UPDATE_STATUS,
+  SET_ONBREAK
 } from './types';
 
 export const increaseBreakTime = () => {
@@ -33,5 +36,25 @@ export const decreaseSessionTime = () => {
 export const setCurrentTime = () => {
   return {
     type: SET_CURRENT_TIME
+  }
+}
+
+export const updateTime = (time) => {
+  return {
+    type: UPDATE_TIME,
+    payload: time
+  }
+}
+
+export const updateStatus = (status) => {
+  return {
+    type: UPDATE_STATUS,
+    payload: status
+  }
+}
+
+export const setOnBreak = () => {
+  return {
+    type: SET_ONBREAK,
   }
 }

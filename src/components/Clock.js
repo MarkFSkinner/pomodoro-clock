@@ -3,10 +3,10 @@ import React from 'react';
 const Clock = props => (
   <div className="row">
     <div className="col-12">
-      <div className="circle clickable">
+      <div className="circle clickable" onClick={props.handleClick}>
         <div className="row">
           <div className="col-12">
-            <h1 id="status" className="countdown-data">SESSION</h1>
+            <h1 id="status" className="countdown-data">{props.status}</h1>
           </div>
         </div>
         <div className="row">

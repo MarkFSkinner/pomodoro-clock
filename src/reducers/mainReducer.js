@@ -7,7 +7,11 @@ import {
   UPDATE_TIME,
   UPDATE_STATUS,
   SET_ONBREAK,
-  UPDATE_ANIMATION
+  UPDATE_ANIMATION,
+  SET_STARTED,
+  SET_PAUSED,
+  SET_REMAINING,
+  START_INTERVAL
 } from '../actions/types';
 
 const initialState = {
@@ -17,7 +21,7 @@ const initialState = {
   totalTime: undefined,
   interval: undefined,
   remaining: undefined,
-  clicked: false,
+  started: false,
   paused: false,
   onBreak: false,
   audio: new Audio('http://cd.textfiles.com/sbsw/BEEPCHMS/MORSE.WAV'),
@@ -75,6 +79,26 @@ export default function(state = initialState, action) {
       return {
         ...state,
         animated: action.payload
+      }
+    case SET_STARTED:
+      return {
+        ...state,
+        started: !state.started
+      }
+    case SET_PAUSED:
+      return {
+        ...state,
+        paused: !state.paused
+      }
+    case SET_REMAINING:
+      return {
+        ...state,
+        remaining: action.payload
+      }
+    case START_INTERVAL:
+      return {
+        ...state,
+        interval: action.payload
       }
     default:
       return state;

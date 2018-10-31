@@ -7,7 +7,11 @@ import {
   UPDATE_TIME,
   UPDATE_STATUS,
   SET_ONBREAK,
-  UPDATE_ANIMATION
+  UPDATE_ANIMATION,
+  SET_STARTED,
+  SET_PAUSED,
+  SET_REMAINING,
+  START_INTERVAL
 } from './types';
 
 export const increaseBreakTime = () => {
@@ -67,3 +71,28 @@ export const updateAnimation = (data) => {
   }
 }
 
+export const setStarted = () => {
+  return {
+    type: SET_STARTED,
+  }
+}
+
+export const setPaused = () => {
+  return {
+    type: SET_PAUSED,
+  }
+}
+
+export const setRemaining = (data) => {
+  return {
+    type: SET_REMAINING,
+    payload: data
+  }
+}
+
+export const startInterval = (data) => {
+  return {
+    type: START_INTERVAL,
+    payload: data
+  }
+}

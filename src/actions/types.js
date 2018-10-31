@@ -7,3 +7,7 @@ export const UPDATE_TIME = 'UPDATE_TIME';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 export const SET_ONBREAK = 'SET_ONBREAK';
 export const UPDATE_ANIMATION = 'UPDATE_ANIMATION';
+export const SET_STARTED = 'SET_STARTED';
+export const SET_PAUSED = 'SET_PAUSED';
+export const SET_REMAINING = 'SET_REMAINING';
+export const START_INTERVAL = 'START_INTERVAL';

@@ -15,7 +15,11 @@ import {
   updateTime,
   updateStatus,
   setOnBreak,
-  updateAnimation
+  updateAnimation,
+  setStarted,
+  setPaused,
+  setRemaining,
+  startInterval
 } from './actions';
 
 
@@ -26,6 +30,7 @@ class App extends Component {
     const start = Date.now();
     const timer = () => {
       const remaining = duration * 60 - (((Date.now() - start) / 1000) | 0);
+      this.props.setRemaining(remaining);
       let hours = (remaining / 3600) | 0;
       let minutes = (remaining / 60) % 60 | 0;
       let seconds = (remaining % 60) | 0;
@@ -41,18 +46,17 @@ class App extends Component {
       }
       if (remaining === 0) {
         this.props.myData.audio.play();
-        //$('#status').removeClass('animated pulse');
         this.props.updateAnimation('countdown-data');
       }
       if (remaining < 0) {
-        clearInterval(interval);
+        //clearInterval(interval);
+        clearInterval(this.props.myData.interval);
         if (this.props.myData.onBreak === false) {
           const totalTime = this.props.myData.breakTime;
           this.startTimer(totalTime);
           this.props.updateStatus("BREAK!");
           document.getElementsByClassName('circle')[0].style.backgroundColor = "#f03232";
           document.getElementsByClassName('circle')[0].style.border = "0.15rem solid #8d0303";
-          //$('#status').addClass('animated pulse');
           this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         } else {
@@ -61,38 +65,60 @@ class App extends Component {
           this.props.updateStatus("SESSION");
           document.getElementsByClassName('circle')[0].style.backgroundColor = "#0de30d";
           document.getElementsByClassName('circle')[0].style.border = "0.15rem solid green";
-          //$('#status').addClass('animated pulse');
           this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         }
       }
     }
     timer();
-    const interval = setInterval(timer, 1000);
+    //const interval = setInterval(timer, 1000);
+    this.props.startInterval(setInterval(timer, 1000));
   }
 
   handleClick = (e) => {
-    if(e.target.classList.contains('break-increase')) {
-      this.props.increaseBreakTime();
-    }
-    if(e.target.classList.contains('break-decrease')) {
-      if (this.props.myData.breakTime > 1) {
-        this.props.decreaseBreakTime();
+    if (this.props.myData.started === false) {
+      if(e.target.classList.contains('break-increase')) {
+        this.props.increaseBreakTime();
       }
-    }
-    if(e.target.classList.contains('session-increase')) {
-      this.props.increaseSessionTime();
-      this.props.setCurrentTime();
-    }
-    if(e.target.classList.contains('session-decrease')) {
-      if (this.props.myData.sessionTime > 1) {
-        this.props.decreaseSessionTime();
+      if(e.target.classList.contains('break-decrease')) {
+        if (this.props.myData.breakTime > 1) {
+          this.props.decreaseBreakTime();
+        }
+      }
+      if(e.target.classList.contains('session-increase')) {
+        this.props.increaseSessionTime();
         this.props.setCurrentTime();
+      }
+      if(e.target.classList.contains('session-decrease')) {
+        if (this.props.myData.sessionTime > 1) {
+          this.props.decreaseSessionTime();
+          this.props.setCurrentTime();
+        }
       }
     }
     if(e.target.classList.contains('circle')) {
-      this.props.updateAnimation('countdown-data animated pulse');
-      this.startTimer(this.props.myData.currentTime);
+      let totalTime;
+      if (this.props.myData.started === false) {
+        this.props.updateAnimation('countdown-data animated pulse');
+        if (this.props.myData.paused === false) {
+          if (this.props.myData.onBreak === false) {
+            totalTime = this.props.myData.sessionTime;
+          } else {
+            totalTime = this.props.myData.breakTime;
+          }
+          this.startTimer(totalTime);
+          this.props.setStarted();
+        } else {
+          totalTime = this.props.myData.remaining / 60;
+          this.startTimer(totalTime);
+          this.props.setStarted();
+          this.props.setPaused();
+        }
+      } else {
+        clearInterval(this.props.myData.interval);
+        this.props.setStarted();
+        this.props.setPaused();
+      }
     }
   }
 
@@ -130,6 +156,10 @@ export default connect(mapStateToProps, {
   updateTime,
   updateStatus,
   setOnBreak,
-  updateAnimation
+  updateAnimation,
+  setStarted,
+  setPaused,
+  setRemaining,
+  startInterval
 })(App);
 

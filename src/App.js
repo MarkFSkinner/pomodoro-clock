@@ -11,7 +11,7 @@ import {
   decreaseBreakTime,
   increaseSessionTime,
   decreaseSessionTime,
-  setCurrentTime,
+  //setCurrentTime,
   updateTime,
   updateStatus,
   setOnBreak,
@@ -19,9 +19,10 @@ import {
   setStarted,
   setPaused,
   setRemaining,
-  startInterval
+  startInterval,
+  increaseCurrentTime,
+  decreaseCurrentTime
 } from './actions';
-
 
 
 class App extends Component {
@@ -71,7 +72,6 @@ class App extends Component {
       }
     }
     timer();
-    //const interval = setInterval(timer, 1000);
     this.props.startInterval(setInterval(timer, 1000));
   }
 
@@ -79,20 +79,44 @@ class App extends Component {
     if (this.props.myData.started === false) {
       if(e.target.classList.contains('break-increase')) {
         this.props.increaseBreakTime();
+        if (this.props.myData.paused === true && this.props.myData.onBreak === true) {
+          this.props.setPaused();
+        }
+        if (this.props.myData.onBreak === true) {
+          this.props.increaseCurrentTime(this.props.myData.breakTime);
+        }
       }
       if(e.target.classList.contains('break-decrease')) {
         if (this.props.myData.breakTime > 1) {
           this.props.decreaseBreakTime();
+          if (this.props.myData.onBreak === true) {
+            this.props.decreaseCurrentTime(this.props.myData.breakTime);
+            if (this.props.myData.paused === true) {
+              this.props.setPaused();
+            }
+          }
         }
       }
       if(e.target.classList.contains('session-increase')) {
         this.props.increaseSessionTime();
-        this.props.setCurrentTime();
+        //this.props.setCurrentTime(this.props.myData.sessionTime);
+        if (this.props.myData.onBreak === false) {
+          this.props.increaseCurrentTime(this.props.myData.sessionTime);
+          if (this.props.myData.paused === true) {
+            this.props.setPaused();
+          }
+        }
       }
       if(e.target.classList.contains('session-decrease')) {
         if (this.props.myData.sessionTime > 1) {
           this.props.decreaseSessionTime();
-          this.props.setCurrentTime();
+          //this.props.setCurrentTime(this.props.myData.sessionTime);
+          if (this.props.myData.onBreak === false) {
+            this.props.decreaseCurrentTime(this.props.myData.sessionTime);
+            if (this.props.myData.paused === true) {
+              this.props.setPaused();
+            }
+          }
         }
       }
     }
@@ -152,7 +176,7 @@ export default connect(mapStateToProps, {
   decreaseBreakTime,
   increaseSessionTime,
   decreaseSessionTime,
-  setCurrentTime,
+  //setCurrentTime,
   updateTime,
   updateStatus,
   setOnBreak,
@@ -160,6 +184,8 @@ export default connect(mapStateToProps, {
   setStarted,
   setPaused,
   setRemaining,
-  startInterval
+  startInterval,
+  increaseCurrentTime,
+  decreaseCurrentTime
 })(App);
 

@@ -3,7 +3,6 @@ import {
   BREAK_DECREASE,
   SESSION_INCREASE,
   SESSION_DECREASE,
-  SET_CURRENT_TIME,
   UPDATE_TIME,
   UPDATE_STATUS,
   SET_ONBREAK,
@@ -60,7 +59,6 @@ export default function(state = initialState, action) {
     case CURRENT_TIME_INCREASE:
       return {
         ...state,
-        //sessionTime: state.sessionTime + 1,
         currentTime: action.payload + 1
       }
     case CURRENT_TIME_DECREASE:

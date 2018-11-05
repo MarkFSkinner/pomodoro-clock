@@ -11,7 +11,6 @@ import {
   decreaseBreakTime,
   increaseSessionTime,
   decreaseSessionTime,
-  //setCurrentTime,
   updateTime,
   updateStatus,
   setOnBreak,
@@ -75,7 +74,7 @@ class App extends Component {
     this.props.startInterval(setInterval(timer, 1000));
   }
 
-  handleClick = (e) => {
+  controlsClick = (e) => {
     if (this.props.myData.started === false) {
       if(e.target.classList.contains('break-increase')) {
         this.props.increaseBreakTime();
@@ -99,7 +98,6 @@ class App extends Component {
       }
       if(e.target.classList.contains('session-increase')) {
         this.props.increaseSessionTime();
-        //this.props.setCurrentTime(this.props.myData.sessionTime);
         if (this.props.myData.onBreak === false) {
           this.props.increaseCurrentTime(this.props.myData.sessionTime);
           if (this.props.myData.paused === true) {
@@ -110,7 +108,6 @@ class App extends Component {
       if(e.target.classList.contains('session-decrease')) {
         if (this.props.myData.sessionTime > 1) {
           this.props.decreaseSessionTime();
-          //this.props.setCurrentTime(this.props.myData.sessionTime);
           if (this.props.myData.onBreak === false) {
             this.props.decreaseCurrentTime(this.props.myData.sessionTime);
             if (this.props.myData.paused === true) {
@@ -120,29 +117,30 @@ class App extends Component {
         }
       }
     }
-    if(e.target.classList.contains('circle')) {
-      let totalTime;
-      if (this.props.myData.started === false) {
-        this.props.updateAnimation('countdown-data animated pulse');
-        if (this.props.myData.paused === false) {
-          if (this.props.myData.onBreak === false) {
-            totalTime = this.props.myData.sessionTime;
-          } else {
-            totalTime = this.props.myData.breakTime;
-          }
-          this.startTimer(totalTime);
-          this.props.setStarted();
+  }
+
+  clockClick = () => {
+    let totalTime;
+    if (this.props.myData.started === false) {
+      this.props.updateAnimation('countdown-data animated pulse');
+      if (this.props.myData.paused === false) {
+        if (this.props.myData.onBreak === false) {
+          totalTime = this.props.myData.sessionTime;
         } else {
-          totalTime = this.props.myData.remaining / 60;
-          this.startTimer(totalTime);
-          this.props.setStarted();
-          this.props.setPaused();
+          totalTime = this.props.myData.breakTime;
         }
+        this.startTimer(totalTime);
+        this.props.setStarted();
       } else {
-        clearInterval(this.props.myData.interval);
+        totalTime = this.props.myData.remaining / 60;
+        this.startTimer(totalTime);
         this.props.setStarted();
         this.props.setPaused();
       }
+    } else {
+      clearInterval(this.props.myData.interval);
+      this.props.setStarted();
+      this.props.setPaused();
     }
   }
 
@@ -153,11 +151,11 @@ class App extends Component {
         <Controls
           breakTime={this.props.myData.breakTime}
           sessionTime={this.props.myData.sessionTime}
-          handleClick={this.handleClick}
+          controlsClick={this.controlsClick}
         />
         <Clock currentTime={this.props.myData.currentTime}
           status={this.props.myData.status}
-          handleClick={this.handleClick}
+          clockClick={this.clockClick}
           animated={this.props.myData.animated}
         />
       </div>
@@ -176,7 +174,6 @@ export default connect(mapStateToProps, {
   decreaseBreakTime,
   increaseSessionTime,
   decreaseSessionTime,
-  //setCurrentTime,
   updateTime,
   updateStatus,
   setOnBreak,

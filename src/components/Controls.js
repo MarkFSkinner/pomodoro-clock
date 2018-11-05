@@ -10,13 +10,13 @@ const Controls = props => (
       </div>
       <div className="row">
         <div className="col-4 offset-sm-1 col-sm-3">
-          <h3 className="break-decrease clickable" onClick={props.handleClick}>-</h3>
+          <h3 className="break-decrease clickable" onClick={props.controlsClick}>-</h3>
         </div>
         <div className="col-4">
           <h3 id="break-time">{props.breakTime}</h3>
         </div>
         <div className="col-4 col-sm-3">
-          <h3 className="break-increase clickable" onClick={props.handleClick}>+</h3>
+          <h3 className="break-increase clickable" onClick={props.controlsClick}>+</h3>
         </div>
       </div>
     </div>
@@ -28,13 +28,13 @@ const Controls = props => (
       </div>
       <div className="row">
         <div className="col-4 offset-sm-1 col-sm-3">
-          <h3 className="session-decrease clickable" onClick={props.handleClick}>-</h3>
+          <h3 className="session-decrease clickable" onClick={props.controlsClick}>-</h3>
         </div>
         <div className="col-4">
           <h3 id="session-time">{props.sessionTime}</h3>
         </div>
         <div className="col-4 col-sm-3">
-          <h3 className="session-increase clickable" onClick={props.handleClick}>+</h3>
+          <h3 className="session-increase clickable" onClick={props.controlsClick}>+</h3>
         </div>
       </div>
     </div>

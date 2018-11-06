@@ -11,8 +11,6 @@ import {
   SET_PAUSED,
   SET_REMAINING,
   START_INTERVAL,
-  //CURRENT_TIME_INCREASE,
-  //CURRENT_TIME_DECREASE
   CURRENT_TIME_SESSION,
   CURRENT_TIME_BREAK
 } from './types';
@@ -40,20 +38,6 @@ export const decreaseSessionTime = () => {
     type: SESSION_DECREASE
   }
 }
-
-/*export const increaseCurrentTime = (data) => {
-  return {
-    type: CURRENT_TIME_INCREASE,
-    payload: data
-  }
-}
-
-export const decreaseCurrentTime = (data) => {
-  return {
-    type: CURRENT_TIME_DECREASE,
-    payload: data
-  }
-}*/
 
 export const sessionCurrentTime = () => {
   return {

@@ -11,8 +11,10 @@ import {
   SET_PAUSED,
   SET_REMAINING,
   START_INTERVAL,
-  CURRENT_TIME_INCREASE,
-  CURRENT_TIME_DECREASE
+  //CURRENT_TIME_INCREASE,
+  //CURRENT_TIME_DECREASE
+  CURRENT_TIME_SESSION,
+  CURRENT_TIME_BREAK
 } from '../actions/types';
 
 const initialState = {
@@ -56,15 +58,15 @@ export default function(state = initialState, action) {
         ...state,
         sessionTime: state.sessionTime - 1
       }
-    case CURRENT_TIME_INCREASE:
+    case CURRENT_TIME_SESSION:
       return {
         ...state,
-        currentTime: action.payload + 1
+        currentTime: state.sessionTime
       }
-    case CURRENT_TIME_DECREASE:
+    case CURRENT_TIME_BREAK:
       return {
         ...state,
-        currentTime: action.payload - 1
+        currentTime: state.breakTime
       }
     case UPDATE_TIME:
       return {

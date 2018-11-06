@@ -3,7 +3,7 @@ import React from 'react';
 const Clock = props => (
   <div className="row">
     <div className="col-12">
-      <div className="circle clickable" onClick={props.clockClick}>
+      <div className="circle clickable" onClick={props.clockClick} onKeyUp={props.handleKeyup}>
         <div className="row">
           <div className="col-12">
             <h1 id="status" className={props.animated}>{props.status}</h1>

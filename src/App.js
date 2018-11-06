@@ -19,12 +19,57 @@ import {
   setPaused,
   setRemaining,
   startInterval,
-  increaseCurrentTime,
-  decreaseCurrentTime
+  //increaseCurrentTime,
+  //decreaseCurrentTime
+  sessionCurrentTime,
+  breakCurrentTime
 } from './actions';
 
 
 class App extends Component {
+
+  componentDidMount() {
+    document.addEventListener('keyup', this.handleKeyup);
+    document.addEventListener('keypress', this.handleKeypress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this.handleKeyup);
+    document.removeEventListener('keypress', this.handleKeypress);
+  }
+
+  handleKeyup = (e) => {
+    //console.log('e.keyCode', e.keyCode);
+    //console.log('BLAH');
+    if (e.keyCode === 13) {
+      this.clockClick();
+    }
+    if (e.keyCode === 189) {
+      if (this.props.myData.started === false) {
+        if (this.props.myData.onBreak === false) {
+          //$('#session-decrease').click();
+          this.decreaseSessionTimeFunction();
+        } else {
+          //$('#break-decrease').click();
+          this.decreaseBreakTimeFunction();
+        }
+      }
+    }
+  }
+
+  handleKeypress = (e) => {
+    if (this.props.myData.started === false) {
+      if (e.keyCode === 43) {
+        if (this.props.myData.onBreak === false) {
+          //$('#session-increase').click();
+          this.increaseSessionTimeFunction();
+        } else {
+          //$('#break-increase').click();
+          this.increaseBreakTimeFunction();
+        }
+      }
+    }
+  }
 
   startTimer = (duration) => {
     const start = Date.now();
@@ -74,19 +119,68 @@ class App extends Component {
     this.props.startInterval(setInterval(timer, 1000));
   }
 
+  increaseBreakTimeFunction = () => {
+    this.props.increaseBreakTime();
+    if (this.props.myData.paused === true && this.props.myData.onBreak === true) {
+      this.props.setPaused();
+    }
+    if (this.props.myData.onBreak === true) {
+      //this.props.increaseCurrentTime(this.props.myData.breakTime);
+      this.props.breakCurrentTime();
+    }
+  }
+
+  decreaseBreakTimeFunction = () => {
+    if (this.props.myData.breakTime > 1) {
+      this.props.decreaseBreakTime();
+      if (this.props.myData.onBreak === true) {
+        //this.props.decreaseCurrentTime(this.props.myData.breakTime);
+        this.props.breakCurrentTime();
+        if (this.props.myData.paused === true) {
+          this.props.setPaused();
+        }
+      }
+    }
+  }
+
+  increaseSessionTimeFunction = () => {
+    this.props.increaseSessionTime();
+    if (this.props.myData.onBreak === false) {
+      //this.props.increaseCurrentTime(this.props.myData.sessionTime);
+      this.props.sessionCurrentTime();
+      if (this.props.myData.paused === true) {
+        this.props.setPaused();
+      }
+    }
+  }
+
+  decreaseSessionTimeFunction = () => {
+    if (this.props.myData.sessionTime > 1) {
+      this.props.decreaseSessionTime();
+      if (this.props.myData.onBreak === false) {
+        //this.props.decreaseCurrentTime(this.props.myData.sessionTime);
+        this.props.sessionCurrentTime();
+        if (this.props.myData.paused === true) {
+          this.props.setPaused();
+        }
+      }
+    }
+  }
+
   controlsClick = (e) => {
     if (this.props.myData.started === false) {
       if(e.target.classList.contains('break-increase')) {
-        this.props.increaseBreakTime();
+        /*this.props.increaseBreakTime();
         if (this.props.myData.paused === true && this.props.myData.onBreak === true) {
           this.props.setPaused();
         }
         if (this.props.myData.onBreak === true) {
           this.props.increaseCurrentTime(this.props.myData.breakTime);
-        }
+        }*/
+        this.increaseBreakTimeFunction();
       }
       if(e.target.classList.contains('break-decrease')) {
-        if (this.props.myData.breakTime > 1) {
+        /*if (this.props.myData.breakTime > 1) {
           this.props.decreaseBreakTime();
           if (this.props.myData.onBreak === true) {
             this.props.decreaseCurrentTime(this.props.myData.breakTime);
@@ -94,19 +188,21 @@ class App extends Component {
               this.props.setPaused();
             }
           }
-        }
+        }*/
+        this.decreaseBreakTimeFunction();
       }
       if(e.target.classList.contains('session-increase')) {
-        this.props.increaseSessionTime();
+        /*this.props.increaseSessionTime();
         if (this.props.myData.onBreak === false) {
           this.props.increaseCurrentTime(this.props.myData.sessionTime);
           if (this.props.myData.paused === true) {
             this.props.setPaused();
           }
-        }
+        }*/
+        this.increaseSessionTimeFunction();
       }
       if(e.target.classList.contains('session-decrease')) {
-        if (this.props.myData.sessionTime > 1) {
+        /*if (this.props.myData.sessionTime > 1) {
           this.props.decreaseSessionTime();
           if (this.props.myData.onBreak === false) {
             this.props.decreaseCurrentTime(this.props.myData.sessionTime);
@@ -114,7 +210,8 @@ class App extends Component {
               this.props.setPaused();
             }
           }
-        }
+        }*/
+        this.decreaseSessionTimeFunction();
       }
     }
   }
@@ -157,6 +254,7 @@ class App extends Component {
           status={this.props.myData.status}
           clockClick={this.clockClick}
           animated={this.props.myData.animated}
+          handleKeyup={this.handleKeyup}
         />
       </div>
     );
@@ -182,7 +280,9 @@ export default connect(mapStateToProps, {
   setPaused,
   setRemaining,
   startInterval,
-  increaseCurrentTime,
-  decreaseCurrentTime
+  //increaseCurrentTime,
+  //decreaseCurrentTime
+  sessionCurrentTime,
+  breakCurrentTime
 })(App);
 

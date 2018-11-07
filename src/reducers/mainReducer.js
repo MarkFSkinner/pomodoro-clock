@@ -19,7 +19,6 @@ const initialState = {
   breakTime: 0.25,
   sessionTime: 0.25,
   currentTime: 0.25,
-  totalTime: undefined,
   interval: undefined,
   remaining: undefined,
   started: false,
@@ -27,9 +26,6 @@ const initialState = {
   onBreak: false,
   audio: new Audio('http://cd.textfiles.com/sbsw/BEEPCHMS/MORSE.WAV'),
   start: Date.now(),
-  hours: undefined,
-  minutes: undefined,
-  seconds: undefined,
   status: 'SESSION',
   animated: 'countdown-data'
 };

@@ -36,33 +36,6 @@ class App extends Component {
     document.removeEventListener('keypress', this.handleKeypress);
   }
 
-  handleKeyup = (e) => {
-    if (e.keyCode === 13) {
-      this.clockClick();
-    }
-    if (e.keyCode === 189) {
-      if (this.props.myData.started === false) {
-        if (this.props.myData.onBreak === false) {
-          this.decreaseSessionTimeFunction();
-        } else {
-          this.decreaseBreakTimeFunction();
-        }
-      }
-    }
-  }
-
-  handleKeypress = (e) => {
-    if (this.props.myData.started === false) {
-      if (e.keyCode === 43) {
-        if (this.props.myData.onBreak === false) {
-          this.increaseSessionTimeFunction();
-        } else {
-          this.increaseBreakTimeFunction();
-        }
-      }
-    }
-  }
-
   startTimer = (duration) => {
     const start = Date.now();
     const timer = () => {
@@ -112,10 +85,10 @@ class App extends Component {
 
   increaseBreakTimeFunction = () => {
     this.props.increaseBreakTime();
-    if (this.props.myData.paused === true && this.props.myData.onBreak === true) {
-      this.props.setPaused();
-    }
     if (this.props.myData.onBreak === true) {
+      if (this.props.myData.paused === true) {
+        this.props.setPaused();
+      }
       this.props.breakCurrentTime();
     }
   }
@@ -154,14 +127,55 @@ class App extends Component {
     }
   }
 
+  handleKeyup = (e) => {
+    if (e.keyCode === 13) {
+      this.clockClick();
+    }
+    if (e.keyCode === 189) {
+      if (this.props.myData.started === false) {
+        if (this.props.myData.onBreak === false) {
+          this.decreaseSessionTimeFunction();
+        } else {
+          this.decreaseBreakTimeFunction();
+        }
+      } else {
+        if (this.props.myData.onBreak === false) {
+          this.decreaseBreakTimeFunction();
+        } else {
+          this.decreaseSessionTimeFunction();
+        }
+      }
+    }
+  }
+
+  handleKeypress = (e) => {
+    if (e.keyCode === 43) {
+      if (this.props.myData.started === false) {
+        if (this.props.myData.onBreak === false) {
+          this.increaseSessionTimeFunction();
+        } else {
+          this.increaseBreakTimeFunction();
+        }
+      } else {
+        if (this.props.myData.onBreak === false) {
+          this.increaseBreakTimeFunction();
+        } else {
+          this.increaseSessionTimeFunction();
+        }
+      }
+    }
+  }
+
   controlsClick = (e) => {
-    if (this.props.myData.started === false) {
+    if (this.props.myData.started === false || this.props.myData.onBreak === false) {
       if(e.target.classList.contains('break-increase')) {
         this.increaseBreakTimeFunction();
       }
       if(e.target.classList.contains('break-decrease')) {
         this.decreaseBreakTimeFunction();
       }
+    }
+    if (this.props.myData.started === false || this.props.myData.onBreak === true) {
       if(e.target.classList.contains('session-increase')) {
         this.increaseSessionTimeFunction();
       }

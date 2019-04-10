@@ -1,5 +1,4 @@
 import {
-  SET_DEFAULT,
   BREAK_INCREASE,
   BREAK_DECREASE,
   SESSION_INCREASE,
@@ -13,14 +12,9 @@ import {
   SET_REMAINING,
   START_INTERVAL,
   CURRENT_TIME_SESSION,
-  CURRENT_TIME_BREAK
+  CURRENT_TIME_BREAK,
+  RESET_CLOCK
 } from './types';
-
-export const setDefault = () => {
-  return {
-    type: SET_DEFAULT
-  }
-}
 
 export const increaseBreakTime = () => {
   return {
@@ -108,5 +102,11 @@ export const startInterval = (data) => {
   return {
     type: START_INTERVAL,
     payload: data
+  }
+}
+
+export const resetClock = () => {
+  return {
+    type: RESET_CLOCK
   }
 }

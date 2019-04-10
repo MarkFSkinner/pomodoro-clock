@@ -1,5 +1,4 @@
 import {
-  SET_DEFAULT,
   BREAK_INCREASE,
   BREAK_DECREASE,
   SESSION_INCREASE,
@@ -13,7 +12,8 @@ import {
   SET_REMAINING,
   START_INTERVAL,
   CURRENT_TIME_SESSION,
-  CURRENT_TIME_BREAK
+  CURRENT_TIME_BREAK,
+  RESET_CLOCK
 } from '../actions/types';
 
 const initialState = {
@@ -33,18 +33,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case SET_DEFAULT:
-      return {
-        ...state,
-        breakTime: 5,
-        sessionTime: 25,
-        currentTime: 25,
-        started: false,
-        paused: false,
-        onBreak: false,
-        status: 'SESSION',
-        animated: 'countdown-data'
-      }
     case BREAK_INCREASE:
       return {
         ...state,
@@ -114,6 +102,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         interval: action.payload
+      }
+    case RESET_CLOCK:
+      return {
+        ...state,
+        breakTime: 5,
+        sessionTime: 25,
+        currentTime: 25,
+        started: false,
+        paused: false,
+        onBreak: false,
+        status: 'SESSION',
+        animated: 'countdown-data'
       }
     default:
       return state;

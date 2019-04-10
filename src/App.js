@@ -8,7 +8,6 @@ import './App.css';
 import { connect } from 'react-redux';
 
 import {
-  setDefault,
   increaseBreakTime,
   decreaseBreakTime,
   increaseSessionTime,
@@ -22,14 +21,14 @@ import {
   setRemaining,
   startInterval,
   sessionCurrentTime,
-  breakCurrentTime
+  breakCurrentTime,
+  resetClock
 } from './actions';
 
 
 class App extends Component {
 
   componentDidMount() {
-    //this.props.setDefault();
     document.addEventListener('keyup', this.handleKeyup);
     document.addEventListener('keypress', this.handleKeypress);
   }
@@ -220,7 +219,7 @@ class App extends Component {
 
   resetFunction = () => {
     clearInterval(this.props.myData.interval);
-    this.props.setDefault();
+    this.props.resetClock();
     document.getElementsByClassName('circle')[0].style.backgroundColor = "#0de30d";
     document.getElementsByClassName('circle')[0].style.border = "0.4rem solid green";
   }
@@ -255,7 +254,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  setDefault,
   increaseBreakTime,
   decreaseBreakTime,
   increaseSessionTime,
@@ -269,5 +267,6 @@ export default connect(mapStateToProps, {
   setRemaining,
   startInterval,
   sessionCurrentTime,
-  breakCurrentTime
+  breakCurrentTime,
+  resetClock
 })(App);

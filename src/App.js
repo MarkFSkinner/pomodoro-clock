@@ -65,7 +65,7 @@ class App extends Component {
           this.startTimer(totalTime);
           this.props.updateStatus("SESSION");
           document.getElementsByClassName('circle')[0].style.backgroundColor = "#0de30d";
-          document.getElementsByClassName('circle')[0].style.border = "0.15rem solid green";
+          document.getElementsByClassName('circle')[0].style.border = "0.4rem solid green";
           this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         } else {
@@ -73,7 +73,7 @@ class App extends Component {
           this.startTimer(totalTime);
           this.props.updateStatus("BREAK!");
           document.getElementsByClassName('circle')[0].style.backgroundColor = "#f03232";
-          document.getElementsByClassName('circle')[0].style.border = "0.15rem solid #8d0303";
+          document.getElementsByClassName('circle')[0].style.border = "0.4rem solid #8d0303";
           this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         }

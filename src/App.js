@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import Title from './components/Title';
 import Controls from './components/Controls';
 import Clock from './components/Clock';
+import Reset from './components/Reset';
 import './App.css';
 
 import { connect } from 'react-redux';
 
 import {
+  setDefault,
   increaseBreakTime,
   decreaseBreakTime,
   increaseSessionTime,
@@ -27,6 +29,7 @@ import {
 class App extends Component {
 
   componentDidMount() {
+    //this.props.setDefault();
     document.addEventListener('keyup', this.handleKeyup);
     document.addEventListener('keypress', this.handleKeypress);
   }
@@ -210,6 +213,13 @@ class App extends Component {
     }
   }
 
+  resetFunction = () => {
+    clearInterval(this.props.myData.interval);
+    this.props.setDefault();
+    document.getElementsByClassName('circle')[0].style.backgroundColor = "#0de30d";
+    document.getElementsByClassName('circle')[0].style.border = "0.4rem solid green";
+  }
+
   render() {
     return (
       <div className='container text-center'>
@@ -225,6 +235,9 @@ class App extends Component {
           animated={this.props.myData.animated}
           handleKeyup={this.handleKeyup}
         />
+        <Reset
+          reset={this.resetFunction}
+        />
       </div>
     );
   }
@@ -237,6 +250,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
+  setDefault,
   increaseBreakTime,
   decreaseBreakTime,
   increaseSessionTime,

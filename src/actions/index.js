@@ -1,4 +1,5 @@
 import {
+  SET_DEFAULT,
   BREAK_INCREASE,
   BREAK_DECREASE,
   SESSION_INCREASE,
@@ -14,6 +15,12 @@ import {
   CURRENT_TIME_SESSION,
   CURRENT_TIME_BREAK
 } from './types';
+
+export const setDefault = () => {
+  return {
+    type: SET_DEFAULT
+  }
+}
 
 export const increaseBreakTime = () => {
   return {

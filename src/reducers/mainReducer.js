@@ -1,4 +1,5 @@
 import {
+  SET_DEFAULT,
   BREAK_INCREASE,
   BREAK_DECREASE,
   SESSION_INCREASE,
@@ -32,6 +33,18 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case SET_DEFAULT:
+      return {
+        ...state,
+        breakTime: 5,
+        sessionTime: 25,
+        currentTime: 25,
+        started: false,
+        paused: false,
+        onBreak: false,
+        status: 'SESSION',
+        animated: 'countdown-data'
+      }
     case BREAK_INCREASE:
       return {
         ...state,

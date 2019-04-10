@@ -25,7 +25,7 @@ const initialState = {
   started: false,
   paused: false,
   onBreak: false,
-  audio: new Audio('http://cd.textfiles.com/sbsw/BEEPCHMS/MORSE.WAV'),
+  audio: new Audio('http://soundbible.com/mp3/analog-watch-alarm_daniel-simion.mp3'),
   start: Date.now(),
   status: 'SESSION',
   animated: 'countdown-data'

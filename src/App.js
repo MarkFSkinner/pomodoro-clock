@@ -58,7 +58,12 @@ class App extends Component {
         this.props.updateTime(time);
       }
       if (remaining === 0) {
-        this.props.myData.audio.play();
+        let alarm = this.props.myData.audio;
+        alarm.play();
+        setTimeout(function(){
+          alarm.pause();
+          alarm.currentTime = 0;
+        }, 3500);
         this.props.updateAnimation('countdown-data');
       }
       if (remaining < 0) {

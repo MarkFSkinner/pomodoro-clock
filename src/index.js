@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import './index.css';
 import App from './App';
-//import registerServiceWorker from './registerServiceWorker';
 import * as serviceWorker from './serviceWorker';
 
 
@@ -18,13 +16,13 @@ const store = createStore(
   rootReducer,
   initialState,
   compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunk)//,
+    //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    //Uncomment above to use redux dev tools for chrome
   )
 );
 
 export default store;
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-//RegisterServiceWorker();
 serviceWorker.unregister();

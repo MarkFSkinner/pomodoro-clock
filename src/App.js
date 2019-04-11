@@ -27,7 +27,6 @@ import {
 
 
 class App extends Component {
-
   componentDidMount() {
     document.addEventListener('keyup', this.handleKeyup);
     document.addEventListener('keypress', this.handleKeypress);
@@ -46,14 +45,14 @@ class App extends Component {
       let hours = (remaining / 3600) | 0;
       let minutes = (remaining / 60) % 60 | 0;
       let seconds = (remaining % 60) | 0;
-      hours = hours < 10 ? "0" + hours : hours;
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
       if (remaining >= 3600) {
-        const time = hours + ":" + minutes + ":" + seconds;
+        const time = hours + ':' + minutes + ':' + seconds;
         this.props.updateTime(time);
       } else {
-        const time = minutes + ":" + seconds;
+        const time = minutes + ':' + seconds;
         this.props.updateTime(time);
       }
       if (remaining === 0) {
@@ -70,17 +69,17 @@ class App extends Component {
         if (this.props.myData.onBreak) {
           const totalTime = this.props.myData.sessionTime;
           this.startTimer(totalTime);
-          this.props.updateStatus("SESSION");
-          document.getElementsByClassName('circle')[0].style.backgroundColor = "#0de30d";
-          document.getElementsByClassName('circle')[0].style.border = "0.4rem solid green";
+          this.props.updateStatus('SESSION');
+          document.getElementsByClassName('circle')[0].style.backgroundColor = '#0de30d';
+          document.getElementsByClassName('circle')[0].style.border = '0.4rem solid green';
           this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         } else {
           const totalTime = this.props.myData.breakTime;
           this.startTimer(totalTime);
-          this.props.updateStatus("BREAK!");
-          document.getElementsByClassName('circle')[0].style.backgroundColor = "#f03232";
-          document.getElementsByClassName('circle')[0].style.border = "0.4rem solid #8d0303";
+          this.props.updateStatus('BREAK!');
+          document.getElementsByClassName('circle')[0].style.backgroundColor = '#f03232';
+          document.getElementsByClassName('circle')[0].style.border = '0.4rem solid #8d0303';
           this.props.updateAnimation('countdown-data animated pulse');
           this.props.setOnBreak();
         }
@@ -220,8 +219,8 @@ class App extends Component {
   resetFunction = () => {
     clearInterval(this.props.myData.interval);
     this.props.resetClock();
-    document.getElementsByClassName('circle')[0].style.backgroundColor = "#0de30d";
-    document.getElementsByClassName('circle')[0].style.border = "0.4rem solid green";
+    document.getElementsByClassName('circle')[0].style.backgroundColor = '#0de30d';
+    document.getElementsByClassName('circle')[0].style.border = '0.4rem solid green';
   }
 
   render() {
@@ -233,7 +232,8 @@ class App extends Component {
           sessionTime={this.props.myData.sessionTime}
           controlsClick={this.controlsClick}
         />
-        <Clock currentTime={this.props.myData.currentTime}
+        <Clock
+          currentTime={this.props.myData.currentTime}
           status={this.props.myData.status}
           clockClick={this.clockClick}
           animated={this.props.myData.animated}

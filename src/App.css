@@ -12,6 +12,7 @@ body {
 
 #controls {
   margin-bottom: 1.5rem;
+  touch-action: manipulation;
 }
 
 .control-element {

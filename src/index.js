@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-//import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -40,4 +39,3 @@ export default store;
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 serviceWorker.unregister();
-//registerServiceWorker();
